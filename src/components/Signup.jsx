@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
 import search1 from "../assets/search 1.png";
@@ -13,6 +13,11 @@ const Signup = () => {
 
   const navigate = useNavigate(); // For navigation
 
+  // Clear autofilled values on component mount
+  useEffect(() => {
+    setFormData({ email: "", password: "" });
+  }, []);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Signup Data:", formData);
@@ -26,6 +31,7 @@ const Signup = () => {
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <form
         onSubmit={handleSubmit}
+        autoComplete="off"
         className="bg-white p-8 rounded-xl shadow-xl border border-gray-200 w-full max-w-md"
       >
         {/* Logo */}
@@ -38,6 +44,8 @@ const Signup = () => {
         <label className="block mb-2 font-medium">Email</label>
         <input
           type="email"
+          name="new-email"
+          autoComplete="off"
           placeholder="Enter your email"
           style={{ backgroundColor: "#E8E8E8" }}
           className="w-full p-2 mb-4 rounded-md outline-none focus:ring-2 focus:ring-purple-400"
@@ -52,6 +60,8 @@ const Signup = () => {
         <label className="block mb-2 font-medium">Password</label>
         <input
           type="password"
+          name="new-password"
+          autoComplete="new-password"
           placeholder="Enter your password"
           style={{ backgroundColor: "#E8E8E8" }}
           className="w-full p-2 mb-6 rounded-md outline-none focus:ring-2 focus:ring-purple-400"
